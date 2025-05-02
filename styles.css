@@ -1,0 +1,15 @@
+.hide {
+  display: none;
+}
+
+.color-correct {
+  background-color: #00ff48;
+}
+
+.color-neutral {
+  background-color: #d3d3d3;
+}
+
+.color-wrong {
+  background-color: #ff0000;
+}
