@@ -1,19 +1,26 @@
+const restartButton = document.getElementById("restartBtn");
+const rankingButton = document.getElementById("rankingBtn");
+const scoreContainerElement = document.getElementById("scoreContainer");
+const textContainer = document.getElementById("textContainer");
+const resultsContainer = document.getElementById("resultsContainer");
+
 document.addEventListener("DOMContentLoaded", () => {
   checkResults();
 });
+
 function checkResults() {
   const usersLocalStorage =
     JSON.parse(localStorage.getItem("usersLocalStorage")) || [];
   if (usersLocalStorage.length === 0) {
     return isNoResult();
   } else {
-    const resultsContainer = document.getElementById("resultsContainer");
-    resultsContainer.classList.remove("hide");
-    return usersLocalStorage.forEach((user) => printResults(user));
+    return showScore(usersLocalStorage[usersLocalStorage.length - 1]);
   }
 }
 
 function isNoResult() {
+  resultsContainer.classList.add("hide");
+  rankingButton.classList.add("hide");
   const noResultsContainer = document.getElementById("noResultsContainer");
   const div = document.createElement("div");
   const noticeTitle = document.createElement("h2");
@@ -22,14 +29,89 @@ function isNoResult() {
   noResultsContainer.appendChild(div);
 }
 
-function printResults(user) {
-  const tableBody = document.getElementById("tableBody");
-  const tableRow = document.createElement("tr");
-  for (const key in user) {
-    const tableCell = document.createElement("td");
-    tableCell.textContent = user[key];
-    tableRow.appendChild(tableCell);
-  }
-
-  tableBody.appendChild(tableRow);
+function showScore(user) {
+  const tittleScore = document.createElement("h2");
+  tittleScore.innerText = "Your score";
+  const getScore = document.createElement("h3");
+  getScore.innerText = `${user.score}/10`;
+  scoreContainerElement.appendChild(tittleScore);
+  scoreContainerElement.appendChild(getScore);
+  const scoreMessage = showText(user.score);
+  createMessage(scoreMessage);
 }
+
+function showText(score) {
+  const scoreNumber = parseInt(score, 10);
+  let scoreMessage;
+  switch (scoreNumber) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+      scoreMessage = "You failed... you should repeat the quiz.";
+      break;
+
+    case 5:
+    case 6:
+      scoreMessage = "You passed the quiz, but you can improve.";
+      break;
+
+    case 7:
+    case 8:
+      scoreMessage = "Well done!! Quizzes are your thing!";
+      break;
+
+    case 9:
+      scoreMessage = "Outstanding!! You're brilliant!!";
+      break;
+    case 10:
+      scoreMessage = "You're the king of the quiz!! CONGRATULATIONS!!";
+      break;
+  }
+  return scoreMessage;
+}
+
+function createMessage(scoreMessage) {
+  const pMessage = document.createElement("p");
+  pMessage.innerText = scoreMessage;
+  textContainer.appendChild(pMessage);
+}
+
+function printRanking() {
+  const rankingContainer = document.getElementById("rankingContainer");
+  rankingContainer.classList.remove("hide");
+  resultsContainer.classList.add("hide");
+  rankingButton.classList.add("hide");
+  const usersLocalStorage =
+    JSON.parse(localStorage.getItem("usersLocalStorage")) || [];
+  usersLocalStorage.forEach((user) => {
+    const tableBody = document.getElementById("tableBody");
+    const tableRow = document.createElement("tr");
+    for (const key in user) {
+      const tableCell = document.createElement("td");
+      tableCell.textContent = user[key];
+      tableRow.appendChild(tableCell);
+    }
+
+    tableBody.appendChild(tableRow);
+  });
+}
+
+function restartGame() {
+  const linkQuestion = document.getElementById("linkQuestion");
+  if (linkQuestion) {
+    setTimeout(() => {
+      window.location.href = linkQuestion.href;
+    }, 1000);
+  }
+}
+
+//Buttons addEventListener
+restartButton.addEventListener("click", () => {
+  restartGame();
+});
+
+rankingButton.addEventListener("click", () => {
+  printRanking();
+});

@@ -1,7 +1,6 @@
 const startButton = document.getElementById("startBtn");
 const nextButton = document.getElementById("nextBtn");
 const finishButton = document.getElementById("finishBtn");
-const exitButton = document.getElementById("exitBtn");
 const tittleQuestion = document.getElementById("tittleQuestion");
 const questionContainerElement = document.getElementById("questionContainer");
 const scoreContainerElement = document.getElementById("scoreContainer");
@@ -72,7 +71,6 @@ initializeQuiz();
 
 function startGame() {
   startButton.classList.add("hide");
-  exitButton.classList.add("hide");
   userForm.classList.add("hide");
   scoreContainerElement.innerHTML = "";
   currentQuestionIndex = 0;
@@ -156,23 +154,6 @@ function resetState() {
   }
 }
 
-function finishGame() {
-  showScore(userScore);
-  finishButton.classList.add("hide");
-  startButton.innerText = "Restart";
-  startButton.classList.remove("hide");
-  exitButton.classList.remove("hide");
-}
-
-function showScore(userScore) {
-  const tittleScore = document.createElement("h2");
-  tittleScore.innerText = "Your score";
-  const getScore = document.createElement("h3");
-  getScore.innerText = `${userScore}/10`;
-  scoreContainerElement.appendChild(tittleScore);
-  scoreContainerElement.appendChild(getScore);
-}
-
 //LocalStorage
 function addUser() {
   const usersLocalStorage =
@@ -188,8 +169,8 @@ function addUser() {
   localStorage.setItem("usersLocalStorage", JSON.stringify(usersLocalStorage));
 }
 
-//Exit game function
-function exitGame() {
+//goResults function
+function goResults() {
   const linkResults = document.getElementById("linkResults");
   if (linkResults) {
     setTimeout(() => {
@@ -207,14 +188,6 @@ nextButton.addEventListener("click", () => {
 });
 
 finishButton.addEventListener("click", () => {
-  checkedAnswer.innerHTML = "";
-  tittleQuestion.innerText = "";
-  questionContainerElement.classList.add("hide");
-  finishGame();
   addUser();
-  initializeQuiz();
-});
-
-exitButton.addEventListener("click", () => {
-  exitGame();
+  goResults();
 });

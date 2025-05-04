@@ -12,16 +12,25 @@
       <nav>
         <ul>
           <li><a href="/home.html">Home</a></li>
-          <li><a href="/question.html">Question</a></li>
+          <li><a href="/question.html " id="linkQuestion">Question</a></li>
           <li><a href="/results.html">Results</a></li>
         </ul>
       </nav>
     </header>
     <main>
       <h1>RESULTS</h1>
+      <section id="resultsContainer">
+        <div id="scoreContainer"></div>
+
+        <div id="textContainer"></div>
+
+        <p>Thanks for playing our quiz!</p>
+      </section>
+
       <div id="noResultsContainer"></div>
+
       <div>
-        <table id="resultsContainer" class="hide">
+        <table id="rankingContainer" class="hide">
           <thead>
             <tr>
               <th>NAME</th>
@@ -31,6 +40,11 @@
           </thead>
           <tbody id="tableBody"></tbody>
         </table>
+      </div>
+
+      <div class="controls">
+        <button id="restartBtn">Play Again</button>
+        <button id="rankingBtn">Show Ranking</button>
       </div>
     </main>
   </body>
