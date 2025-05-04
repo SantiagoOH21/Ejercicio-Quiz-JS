@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Question</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="/main.js" defer></script>
+    <script src="/js/main.js" defer></script>
   </head>
   <body>
     <header>
       <nav>
         <ul>
-          <li><a href="/index.html">Home</a></li>
+          <li><a href="/home.html">Home</a></li>
           <li><a href="/question.html">Question</a></li>
-          <li><a href="/results.html">Results</a></li>
+          <li><a href="/results.html" id="linkResults">Results</a></li>
         </ul>
       </nav>
     </header>
     <main>
-      <h1>QUESTION</h1>
+      <h1 id="tittleQuestion"></h1>
       <section id="questionContainer" class="hide">
         <div id="question">Question</div>
 
@@ -29,10 +29,16 @@
 
       <div id="scoreContainer"></div>
 
+      <form id="userForm">
+        <label for="userName">Name</label>
+        <input type="text" id="userName" placeholder="Write your name" />
+      </form>
+
       <div class="controls">
         <button id="startBtn">Start</button>
         <button id="nextBtn" class="hide">Next</button>
         <button id="finishBtn" class="hide">Finish</button>
+        <button id="exitBtn" class="hide">Exit</button>
       </div>
     </main>
   </body>

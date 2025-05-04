@@ -1,5 +1,27 @@
+button {
+  margin: 1em;
+  padding: 1em;
+  width: 40%;
+}
+
 .hide {
   display: none;
+}
+
+.color-button1 {
+  background-color: #ea4335;
+}
+
+.color-button2 {
+  background-color: #fbbc04;
+}
+
+.color-button3 {
+  background-color: #4285f4;
+}
+
+.color-button4 {
+  background-color: #34a853;
 }
 
 .color-correct {
@@ -12,4 +34,8 @@
 
 .color-wrong {
   background-color: #ff0000;
+}
+
+.disableButton {
+  color: #000000;
 }

@@ -1,52 +1,81 @@
 const startButton = document.getElementById("startBtn");
 const nextButton = document.getElementById("nextBtn");
 const finishButton = document.getElementById("finishBtn");
+const exitButton = document.getElementById("exitBtn");
+const tittleQuestion = document.getElementById("tittleQuestion");
 const questionContainerElement = document.getElementById("questionContainer");
 const scoreContainerElement = document.getElementById("scoreContainer");
 const checkedAnswer = document.getElementById("checkedAnswer");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answerButtons");
+const userForm = document.querySelector("#userForm");
+const inputName = document.getElementById("userName");
 let currentQuestionIndex;
-let correctAnswers;
-let userAnswers;
 let userScore;
 
-const questionList = [
-  {
-    question: "What is 16 / 2 + 2 * 3?",
-    answers: [
-      { text: "12", correct: false },
-      { text: "30", correct: false },
-      { text: "14", correct: true },
-      { text: "16/12", correct: false },
-    ],
-  },
-  {
-    question: "Is web development fun?",
-    answers: [
-      { text: "Kinda", correct: false },
-      { text: "YES!!!", correct: true },
-      { text: "Um no", correct: false },
-      { text: "IDK", correct: false },
-    ],
-  },
-  {
-    question: "What is 4 * 2?",
-    answers: [
-      { text: "6", correct: false },
-      { text: "8", correct: true },
-      { text: "Yes", correct: false },
-      { text: "No", correct: false },
-    ],
-  },
-];
+function exchangeAnswer(objAnswer) {
+  randomIndex = Math.floor(Math.random() * 4);
+  if (randomIndex !== 3) {
+    return ([objAnswer[3], objAnswer[randomIndex]] = [
+      objAnswer[randomIndex],
+      objAnswer[3],
+    ]);
+  }
+}
+
+function createAnswers(incorrectAnswers, correctAnswer) {
+  const answers = [];
+  incorrectAnswers.forEach((incorrect) => {
+    const incorrectAnswer = { text: `${incorrect}`, correct: false };
+    answers.push(incorrectAnswer);
+  });
+  const correctOption = { text: `${correctAnswer}`, correct: true };
+  answers.push(correctOption);
+  exchangeAnswer(answers);
+  return answers;
+}
+
+function createQuestions(resultsAPI) {
+  const questionList = [];
+  resultsAPI.forEach((result) => {
+    const question = result.question;
+    const incorrectAnswers = result.incorrect_answers;
+    const correctAnswer = result.correct_answer;
+    const answers = createAnswers(incorrectAnswers, correctAnswer);
+    questionList.push({ question, answers });
+  });
+  return questionList;
+}
+
+//API called
+async function getAPIQuestions() {
+  try {
+    const response = await fetch(
+      "https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple"
+    );
+    const res = await response.json();
+    const resultsAPI = res.results;
+    questionList = createQuestions(resultsAPI);
+    return questionList;
+  } catch (error) {
+    console.error("Error getting questions from the API", error);
+    return [];
+  }
+}
+
+async function initializeQuiz() {
+  questionList = await getAPIQuestions();
+}
+initializeQuiz();
+
+//Game's functions
 
 function startGame() {
   startButton.classList.add("hide");
+  exitButton.classList.add("hide");
+  userForm.classList.add("hide");
   scoreContainerElement.innerHTML = "";
   currentQuestionIndex = 0;
-  correctAnswers = [];
-  userAnswers = [];
   userScore = 0;
   questionContainerElement.classList.remove("hide");
   setNextQuestion();
@@ -54,26 +83,18 @@ function startGame() {
 
 function showQuestion(item) {
   questionElement.innerText = item.question;
+  let bgcClass = 0;
   item.answers.forEach((answer) => {
+    bgcClass++;
     const button = document.createElement("button");
+    button.classList.add(`color-button${bgcClass}`);
     button.innerText = answer.text;
 
     if (answer.correct) {
       button.dataset.correct = true;
-      correctAnswers.push(answer.text);
-
-      // hola
-      console.log("correctAnswers", correctAnswers);
-      //   adios
     }
 
     button.addEventListener("click", () => {
-      userAnswers.push(answer.text);
-
-      // hola
-      console.log("userAnswers", userAnswers);
-      //   adios
-
       const isCorrect = button.dataset.correct === "true";
       if (!isCorrect) {
         button.classList.add("color-wrong");
@@ -89,6 +110,8 @@ function showQuestion(item) {
 
 function setNextQuestion() {
   resetState();
+  questionNumber = currentQuestionIndex + 1;
+  tittleQuestion.innerText = `QUESTION ${questionNumber}`;
   showQuestion(questionList[currentQuestionIndex]);
 }
 
@@ -104,6 +127,7 @@ function selectAnswer() {
   Array.from(answerButtonsElement.children).forEach((button) => {
     setStatusClass(button);
     button.disabled = true;
+    button.classList.add("disableButton"); // Clase, para poner la letra de color negro
   });
   if (questionList.length > currentQuestionIndex + 1) {
     nextButton.classList.remove("hide");
@@ -116,6 +140,7 @@ function showCheckedAnswer(isCorrect) {
   const answerMessage = document.createElement("h2");
   if (isCorrect) {
     answerMessage.innerText = "Correct!";
+    userScore++;
   } else {
     answerMessage.innerText = "Incorrect";
   }
@@ -132,19 +157,11 @@ function resetState() {
 }
 
 function finishGame() {
-  for (let i = 0; i < correctAnswers.length; i++) {
-    if (correctAnswers[i] === userAnswers[i]) {
-      userScore++;
-    }
-  }
-  // hola
-  console.log("userScore", userScore, "/10");
-  //   adios
-
   showScore(userScore);
   finishButton.classList.add("hide");
   startButton.innerText = "Restart";
   startButton.classList.remove("hide");
+  exitButton.classList.remove("hide");
 }
 
 function showScore(userScore) {
@@ -156,6 +173,32 @@ function showScore(userScore) {
   scoreContainerElement.appendChild(getScore);
 }
 
+//LocalStorage
+function addUser() {
+  const usersLocalStorage =
+    JSON.parse(localStorage.getItem("usersLocalStorage")) || [];
+  const userName = inputName.value.trim();
+  const dateGame = new Date().toLocaleDateString();
+  const newUser = {
+    name: userName,
+    score: userScore,
+    date: dateGame,
+  };
+  usersLocalStorage.push(newUser);
+  localStorage.setItem("usersLocalStorage", JSON.stringify(usersLocalStorage));
+}
+
+//Exit game function
+function exitGame() {
+  const linkResults = document.getElementById("linkResults");
+  if (linkResults) {
+    setTimeout(() => {
+      window.location.href = linkResults.href;
+    }, 1000);
+  }
+}
+
+//Buttons addEventListener
 startButton.addEventListener("click", startGame);
 
 nextButton.addEventListener("click", () => {
@@ -165,5 +208,13 @@ nextButton.addEventListener("click", () => {
 
 finishButton.addEventListener("click", () => {
   checkedAnswer.innerHTML = "";
+  tittleQuestion.innerText = "";
+  questionContainerElement.classList.add("hide");
   finishGame();
+  addUser();
+  initializeQuiz();
+});
+
+exitButton.addEventListener("click", () => {
+  exitGame();
 });
