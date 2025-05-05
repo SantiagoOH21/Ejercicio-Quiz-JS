@@ -1,0 +1,46 @@
+/* css para las paginas de questions y results */
+.gamePage {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  margin: 2rem;
+  border-radius: 1rem;
+  align-items: center;
+  position: relative;
+  height: 70vh;
+  width: auto;
+}
+
+
+/* css para la pagina de home */
+
+.homePage {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  margin: 2rem;
+  border-radius: 1rem;
+  align-items: center;
+  position: relative;
+  height: 25vh;
+  width: auto;
+}
+
+
+
+.homePageStats {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  margin: 2rem;
+  border-radius: 1rem;
+  align-items: center;
+  position: relative;
+  height: 50vh;
+  width: auto;
+}
+
+
+
+
+

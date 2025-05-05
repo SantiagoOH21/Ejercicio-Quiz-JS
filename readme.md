@@ -6,11 +6,11 @@
 
 😁
 
-<!-- - Falta:
+<!-- - Falta:IÑIGO
 
 
 1. Terminar la página RESULTS.
-    1.1 poner numeros en grande como en grande, centar y negratia el texto de abajo, añadir 
+    1.1 poner numeros en grande como en grande, centar y negratia el texto de abajo, añadir
     1.2 poner un boton nuevo que redireccione a la pagina de home (similar, con id y tal, que el boton de play again)
 
 2. Hacer la página HOME.
@@ -21,7 +21,7 @@
 
 4. cambiar readme al oficial y mover estos comentarios
 
-5. 
+5.
 
 
 

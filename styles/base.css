@@ -19,18 +19,6 @@ a {
   color: #ffffff;
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  margin: 2rem;
-  border-radius: 1rem;
-  align-items: center;
-  position: relative;
-  height: 70vh;
-  width: auto;
-}
-
 h1 {
   text-align: left;
   padding: 1rem;
