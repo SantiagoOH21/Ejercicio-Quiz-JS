@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
     <link rel="stylesheet" href="./styles/style.css" />
+    <script src="/js/home.js" defer></script>
   </head>
   <body>
     <header>
@@ -19,8 +20,16 @@
     <h1>Quiz</h1>
     <main>
       <h2>HOME</h2>
-      <div class="homePage"></div>
-      <div class="homePageStats"></div>
+      <div class="homePage">
+<p>Welcome to the Quiz!</p>
+<button id="startBtn" class="controlsBtn">Take the Quiz</button>      
+
+
+      </div>
+      <div class="homePageStats">
+        <canvas id="myChart"></canvas>
+      </div>
     </main>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </html>
