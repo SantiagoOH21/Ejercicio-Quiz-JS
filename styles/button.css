@@ -6,7 +6,7 @@ button {
 }
 
 .controls {
-  position: fixed;
+  position: absolute;
   bottom: 1rem;
   right: 3rem;
   width: 60%;
@@ -16,7 +16,7 @@ button {
 .controlsBtn {
   background-color: #0b80c1;
   color: #ffffff;
-  width: 30%;
+  width: 35%;
 }
 
 .hide {
