@@ -22,19 +22,17 @@ function isNoResult() {
   resultsContainer.classList.add("hide");
   rankingButton.classList.add("hide");
   const noResultsContainer = document.getElementById("noResultsContainer");
-  const div = document.createElement("div");
   const noticeTitle = document.createElement("h2");
   noticeTitle.innerText = "There are no results to show";
-  div.appendChild(noticeTitle);
-  noResultsContainer.appendChild(div);
+  noResultsContainer.appendChild(noticeTitle);
 }
 
 function showScore(user) {
-  const tittleScore = document.createElement("h2");
-  tittleScore.innerText = "Your score";
+  const titleScore = document.createElement("h2");
+  titleScore.innerText = "Your score";
   const getScore = document.createElement("h3");
   getScore.innerText = `${user.score}/10`;
-  scoreContainerElement.appendChild(tittleScore);
+  scoreContainerElement.appendChild(titleScore);
   scoreContainerElement.appendChild(getScore);
   const scoreMessage = showText(user.score);
   createMessage(scoreMessage);
@@ -50,24 +48,24 @@ function showText(score) {
     case 3:
     case 4:
       scoreMessage =
-        "You failed... But don't worry, you can try the quiz again!";
+        "You failed 😪... But don't worry, you can try the quiz again!";
       break;
 
     case 5:
     case 6:
-      scoreMessage = "You passed the quiz, but you can improve.";
+      scoreMessage = "You passed the quiz, but you can improve.😉";
       break;
 
     case 7:
     case 8:
-      scoreMessage = "Well done!! Quizzes are your thing!";
+      scoreMessage = "Well done!!🎉 Quizzes are your thing!";
       break;
 
     case 9:
-      scoreMessage = "Outstanding!! You're brilliant!!";
+      scoreMessage = "Outstanding!! You're brilliant 🤓!!";
       break;
     case 10:
-      scoreMessage = "You're the king of the quiz!! CONGRATULATIONS!!";
+      scoreMessage = "You're the king 👑 of the quiz!! CONGRATULATIONS!!🍾🍾";
       break;
   }
   return scoreMessage;
@@ -79,6 +77,31 @@ function createMessage(scoreMessage) {
   textContainer.appendChild(pMessage);
 }
 
+
+
+
+function restartGame() {
+  const linkQuestion = document.getElementById("linkQuestion");
+  if (linkQuestion) {
+    setTimeout(() => {
+      window.location.href = linkQuestion.href;
+    }, 1000);
+  }
+}
+
+//Buttons addEventListener
+restartButton.addEventListener("click", () => {
+  restartGame();
+});
+
+
+
+
+
+
+
+
+// Ejercicio extra: ranking de mejores jugadores
 function printRanking() {
   const rankingContainer = document.getElementById("rankingContainer");
   rankingContainer.classList.remove("hide");
@@ -98,21 +121,10 @@ function printRanking() {
     tableBody.appendChild(tableRow);
   });
 }
-
-function restartGame() {
-  const linkQuestion = document.getElementById("linkQuestion");
-  if (linkQuestion) {
-    setTimeout(() => {
-      window.location.href = linkQuestion.href;
-    }, 1000);
-  }
-}
-
-//Buttons addEventListener
-restartButton.addEventListener("click", () => {
-  restartGame();
-});
-
 rankingButton.addEventListener("click", () => {
   printRanking();
 });
+
+
+
+// Final codigo ejercicio extra
