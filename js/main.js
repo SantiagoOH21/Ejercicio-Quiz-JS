@@ -1,11 +1,11 @@
 const startButton = document.getElementById("startBtn");
 const nextButton = document.getElementById("nextBtn");
 const finishButton = document.getElementById("finishBtn");
+const welcomeQuiz = document.getElementById("welcomeQuiz");
 const tittleQuestion = document.getElementById("tittleQuestion");
 const questionContainerElement = document.getElementById("questionContainer");
-const scoreContainerElement = document.getElementById("scoreContainer");
 const checkedAnswer = document.getElementById("checkedAnswer");
-const questionElement = document.getElementById("question");
+const questionElement = document.getElementById("questionText");
 const answerButtonsElement = document.getElementById("answerButtons");
 const userForm = document.querySelector("#userForm");
 const inputName = document.getElementById("userName");
@@ -71,8 +71,8 @@ initializeQuiz();
 
 function startGame() {
   startButton.classList.add("hide");
+  welcomeQuiz.classList.add("hide");
   userForm.classList.add("hide");
-  scoreContainerElement.innerHTML = "";
   currentQuestionIndex = 0;
   userScore = 0;
   questionContainerElement.classList.remove("hide");
@@ -137,10 +137,10 @@ function selectAnswer() {
 function showCheckedAnswer(isCorrect) {
   const answerMessage = document.createElement("h2");
   if (isCorrect) {
-    answerMessage.innerText = "Correct!";
+    answerMessage.innerText = "Correct! \u{1F389}";
     userScore++;
   } else {
-    answerMessage.innerText = "Incorrect";
+    answerMessage.innerText = "Incorrect \u{1F61F}";
   }
 
   checkedAnswer.appendChild(answerMessage);

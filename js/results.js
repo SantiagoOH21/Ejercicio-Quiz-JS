@@ -49,7 +49,8 @@ function showText(score) {
     case 2:
     case 3:
     case 4:
-      scoreMessage = "You failed... you should repeat the quiz.";
+      scoreMessage =
+        "You failed... But don't worry, you can try the quiz again!";
       break;
 
     case 5:

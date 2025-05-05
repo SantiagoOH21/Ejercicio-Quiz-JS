@@ -1,0 +1,11 @@
+@media (min-width: 768px) {
+  #answerButtons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+  #answerButtons button {
+    width: 40%;
+  }
+}

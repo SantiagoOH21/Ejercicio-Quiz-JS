@@ -1,0 +1,47 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  background-color: #000000;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  margin: 1rem;
+  justify-content: center;
+  padding: 1rem;
+  gap: 3rem;
+}
+
+a {
+  color: #ffffff;
+}
+
+h1 {
+  text-align: center;
+  margin: 0.5rem;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+p {
+  text-align: center;
+  font-size: 1.1rem;
+  margin: 1rem;
+  font-weight: 600;
+  line-height: 1.7;
+}

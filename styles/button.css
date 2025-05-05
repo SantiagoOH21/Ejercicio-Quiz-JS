@@ -1,7 +1,22 @@
 button {
-  margin: 1em;
-  padding: 1em;
-  width: 40%;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.controls {
+  position: fixed;
+  bottom: 1rem;
+  right: 3rem;
+  width: 60%;
+  text-align: end;
+}
+
+.controlsBtn {
+  background-color: #0b80c1;
+  color: #ffffff;
+  width: 30%;
 }
 
 .hide {
