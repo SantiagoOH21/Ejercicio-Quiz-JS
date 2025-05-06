@@ -158,6 +158,9 @@ function resetState() {
 function addUser() {
   const usersLocalStorage =
     JSON.parse(localStorage.getItem("usersLocalStorage")) || [];
+  if (inputName.value.trim() === "") {
+    inputName.value = "Gamer X";
+  }
   const userName = inputName.value.trim();
   const dateGame = new Date().toLocaleDateString();
   const newUser = {
