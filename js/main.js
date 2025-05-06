@@ -135,7 +135,7 @@ function selectAnswer() {
 }
 
 function showCheckedAnswer(isCorrect) {
-  const answerMessage = document.createElement("h2");
+  const answerMessage = document.createElement("h3");
   if (isCorrect) {
     answerMessage.innerText = "Correct! \u{1F389}";
     userScore++;

@@ -13,8 +13,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 10rem 4rem;
-  gap: 4rem;
+  margin: 4rem;
+  gap: 1rem;
 }
 
+.paragraphRed {
+  color: #ea4335;
+}
 
+.paragraphYellow {
+  color: #fbbc04;
+}
+
+.paragraphBlue {
+  color: #4285f4;
+}
+
+.paragraphGreen {
+  color: #34a853;
+}
