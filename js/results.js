@@ -29,12 +29,40 @@ function isNoResult() {
 }
 
 function showScore(user) {
+  // Clear previous content
+  scoreContainerElement.innerHTML = "";
+
+  // Create a wrapper to center the score and text
+  const scoreWrapper = document.createElement("div");
+  scoreWrapper.style.display = "flex";
+  scoreWrapper.style.flexDirection = "column";
+  scoreWrapper.style.alignItems = "center";
+  scoreWrapper.style.justifyContent = "center";
+
+  // Create the score circle
+  const getScore = document.createElement("div");
+  getScore.innerText = `${user.score} / 10`;
+  getScore.style.display = "flex";
+  getScore.style.alignItems = "center";
+  getScore.style.justifyContent = "center";
+  getScore.style.width = "12rem";
+  getScore.style.height = "12rem";
+  getScore.style.borderRadius = "50%";
+  getScore.style.fontSize = "3rem";
+  getScore.style.fontWeight = "bold";
+  getScore.style.marginBottom = "1.2rem";
+  getScore.style.backgroundColor = user.score <= 4 ? "#ff7a7a" : "#7fffd4";
+  getScore.style.color = "#111";
+
+  // Title below the circle
   const titleScore = document.createElement("h2");
   titleScore.innerText = "Your score";
-  const getScore = document.createElement("h4");
-  getScore.innerText = `${user.score} / 10`;
-  scoreContainerElement.appendChild(titleScore);
-  scoreContainerElement.appendChild(getScore);
+  titleScore.style.margin = "1rem 0 0.5rem 0";
+
+  scoreWrapper.appendChild(getScore);
+  scoreWrapper.appendChild(titleScore);
+  scoreContainerElement.appendChild(scoreWrapper);
+
   const scoreMessage = showText(user.score);
   createMessage(scoreMessage);
 }

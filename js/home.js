@@ -2,74 +2,135 @@ const startButton = document.getElementById("startBtn");
 const homeMessage = document.getElementById("homeMessage");
 const ctx = document.getElementById("myChart");
 
-function checkData() {
-  const dataChart = JSON.parse(localStorage.getItem("usersLocalStorage")) || [];
-
-  if (dataChart.length === 0) {
-    return isNoData();
+// Use the checkResults function to get data
+function checkResults() {
+  const usersLocalStorage =
+    JSON.parse(localStorage.getItem("usersLocalStorage")) || [];
+  if (usersLocalStorage.length === 0) {
+    return isNoResult();
   } else {
-    return printChart(dataChart);
+    return showScore(usersLocalStorage[usersLocalStorage.length - 1]);
   }
 }
 
-function isNoData() {
-  const noticeTitle = document.createElement("h2");
-  noticeTitle.innerText = "There are no results to show";
-  homeMessage.appendChild(noticeTitle);
+// Function to handle no results
+function isNoResult() {
+  console.log("No results found");
+  return [];
 }
 
-function printChart(chartData) {
-  dates = chartData.map((item) => item.date);
-  scores = chartData.map((item) => item.score);
+// Function to display score and prepare chart data
+function showScore(latestUser) {
+  // Get all users for chart data
+  const usersLocalStorage =
+    JSON.parse(localStorage.getItem("usersLocalStorage")) || [];
 
-  const data = {
-    type: "line",
-    data: {
-      labels: dates,
-      datasets: [
-        {
-          label: "Results of your quizzes",
-          data: scores,
-          borderWidth: 1,
-        },
-      ],
-    },
+  // Sort users by date
+  usersLocalStorage.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: "Results of your quizzes",
-        },
-        legend: {
-          display: false,
-        },
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 10,
-          title: {
-            display: true,
-            text: "Score",
-          },
-        },
-        x: {
-          title: {
-            display: true,
-            text: "Date",
-          },
-        },
-      },
-    },
-  };
-
-  const myChart = new Chart(ctx, data);
+  return usersLocalStorage;
 }
 
-checkData();
+// Get the user data using the provided functions
+const userData = checkResults();
+
+// Extract dates and scores for the chart
+const dates = userData.map((item) => item.date);
+const scores = userData.map((item) => item.score);
+
+// Create chart
+const data = {
+  labels: dates,
+  datasets: [
+    {
+      label: "Your stats",
+      data: scores,
+      borderColor: "rgb(0, 123, 255)",
+      backgroundColor: "rgba(0, 123, 255, 0.1)",
+      borderWidth: 2,
+      tension: 0.1,
+      pointRadius: 3,
+    },
+  ],
+};
+
+// Chart configuration
+const config = {
+  type: "line",
+  data: data,
+  options: {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: "Your stats",
+        font: {
+          size: 16,
+          weight: "bold",
+        },
+      },
+      legend: {
+        display: false,
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        suggestedMax: 10,
+        ticks: {
+          stepSize: 5,
+        },
+      },
+      x: {
+        ticks: {
+          font: {
+            size: 10,
+          },
+        },
+      },
+    },
+  },
+};
+
+// Set chart size to be smaller
+ctx.style.maxHeight = "250px";
+ctx.style.maxWidth = "500px";
+
+// Initialize the chart
+const myChart = new Chart(ctx, config);
+
+// Date display below chart
+function displayQuizDates() {
+  if (!userData || userData.length === 0) {
+    return;
+  }
+
+  const dateListContainer = document.createElement("div");
+  dateListContainer.style.marginTop = "10px";
+  dateListContainer.style.fontSize = "10px";
+  dateListContainer.style.fontWeight = "bold";
+  dateListContainer.style.display = "grid";
+  dateListContainer.style.gridTemplateColumns =
+    "repeat(auto-fit, minmax(150px, 1fr))";
+  dateListContainer.style.gap = "2px";
+
+  userData.forEach((item) => {
+    const dateEntry = document.createElement("div");
+    dateEntry.textContent = `${item.date}: ${item.score} aciertos`;
+    dateEntry.style.padding = "5px";
+    dateEntry.style.marginBottom = "1px";
+    dateListContainer.appendChild(dateEntry);
+  });
+
+  // Insert after the canvas
+  ctx.parentNode.insertBefore(dateListContainer, ctx.nextSibling);
+}
+
+// Call function to display dates
+displayQuizDates();
+
+// Link to quiz
+const startButton = document.getElementById("startBtn");
 
 function goQuiz() {
   const linkQuestion = document.getElementById("linkQuiz");
