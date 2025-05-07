@@ -1,4 +1,3 @@
-const startButton = document.getElementById("startBtn");
 const homeMessage = document.getElementById("homeMessage");
 const ctx = document.getElementById("myChart");
 
