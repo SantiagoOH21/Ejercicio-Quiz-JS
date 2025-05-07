@@ -1,35 +1,75 @@
+const startButton = document.getElementById("startBtn");
+const homeMessage = document.getElementById("homeMessage");
 const ctx = document.getElementById("myChart");
 
-// Datos para el gráfico
+function checkData() {
+  const dataChart = JSON.parse(localStorage.getItem("usersLocalStorage")) || [];
 
-const labels = ["0-4", "5-6", "7-8", "8-9", "10"];
+  if (dataChart.length === 0) {
+    return isNoData();
+  } else {
+    return printChart(dataChart);
+  }
+}
 
-const data = {
-  type: "line",
-  data: {
-    labels: labels,
-    datasets: [
-      {
-        label: "Results of your quizzes",
-        data:
-          // traer los datos del LocalStorage
-          [12, 19, 3, 5, 2, 3],
-        borderWidth: 1,
+function isNoData() {
+  const noticeTitle = document.createElement("h2");
+  noticeTitle.innerText = "There are no results to show";
+  homeMessage.appendChild(noticeTitle);
+}
+
+function printChart(chartData) {
+  dates = chartData.map((item) => item.date);
+  scores = chartData.map((item) => item.score);
+
+  const data = {
+    type: "line",
+    data: {
+      labels: dates,
+      datasets: [
+        {
+          label: "Results of your quizzes",
+          data: scores,
+          borderWidth: 1,
+        },
+      ],
+    },
+
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: "Results of your quizzes",
+        },
+        legend: {
+          display: false,
+        },
       },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 10,
+          title: {
+            display: true,
+            text: "Score",
+          },
+        },
+        x: {
+          title: {
+            display: true,
+            text: "Date",
+          },
+        },
       },
     },
-  },
-};
+  };
 
-const myChart = new Chart(ctx, data);
+  const myChart = new Chart(ctx, data);
+}
 
-const startButton = document.getElementById("startBtn");
+checkData();
 
 function goQuiz() {
   const linkQuestion = document.getElementById("linkQuiz");
