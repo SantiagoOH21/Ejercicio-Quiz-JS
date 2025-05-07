@@ -14,7 +14,9 @@ function checkResults() {
 
 // Function to handle no results
 function isNoResult() {
-  console.log("No results found");
+  const noticeTitle = document.createElement("h2");
+  noticeTitle.innerText = "There are no results to show";
+  homeMessage.appendChild(noticeTitle);
   return [];
 }
 
