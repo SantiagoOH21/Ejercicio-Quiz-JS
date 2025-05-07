@@ -28,3 +28,19 @@ const data = {
 };
 
 const myChart = new Chart(ctx, data);
+
+const startButton = document.getElementById("startBtn");
+
+function goQuiz() {
+  const linkQuestion = document.getElementById("linkQuiz");
+  if (linkQuiz) {
+    setTimeout(() => {
+      window.location.href = linkQuiz.href;
+    }, 1000);
+  }
+}
+
+//Buttons addEventListener
+startButton.addEventListener("click", () => {
+  goQuiz();
+});

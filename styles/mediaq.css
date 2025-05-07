@@ -8,4 +8,53 @@
   #answerButtons button {
     width: 40%;
   }
+  #resultsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+  .messagesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2.5rem 1rem;
+  }
+  h4 {
+    text-align: center;
+    margin: 1rem 5rem;
+    border-radius: 100%;
+    padding: 3rem 1rem;
+    width: 10rem;
+    height: 10rem;
+    font-size: 3rem;
+  }
+  p {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  #resultsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .messagesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin: 4rem 1rem;
+  }
+  h4 {
+    text-align: center;
+    margin: 1rem 10rem;
+    border-radius: 100%;
+    padding: 5rem 2rem;
+    width: 15rem;
+    height: 15rem;
+    font-size: 4rem;
+  }
+  p {
+    font-size: 1.5rem;
+  }
 }

@@ -11,7 +11,6 @@
   width: auto;
 }
 
-
 /* css para la pagina de home */
 
 .homePage {
@@ -26,8 +25,6 @@
   width: auto;
 }
 
-
-
 .homePageStats {
   display: flex;
   flex-direction: column;
@@ -36,11 +33,13 @@
   border-radius: 1rem;
   align-items: center;
   position: relative;
-  height: 50vh;
+  height: 40vh;
   width: auto;
 }
 
-
-
-
-
+.messagesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}

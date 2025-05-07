@@ -3,6 +3,8 @@
 
 @import "/styles/button.css";
 @import "/styles/questions.css";
-@import "/styles/mediaq.css";
 
 @import "/styles/main.css";
+
+@import "/styles/mediaq.css";
+@import "/styles/ranking.css";

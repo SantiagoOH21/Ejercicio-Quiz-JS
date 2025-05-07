@@ -36,6 +36,17 @@ h3 {
   margin-top: 3rem;
 }
 
+h4 {
+  text-align: center;
+  margin: 1rem 10rem;
+  background-color: #7fffd4;
+  border-radius: 100%;
+  padding: 3rem 2rem;
+  width: 8rem;
+  height: 8rem;
+  font-size: 1.5rem;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -52,15 +63,10 @@ input {
   border-radius: 5px;
 }
 
-p,
-pre {
+p {
   text-align: center;
   font-size: 1.1rem;
-  margin: 1rem;
+  /* margin: 0.5rem; */
   font-weight: 600;
   line-height: 1.7;
-}
-
-pre {
-  font-family: "Roboto", sans-serif;
 }

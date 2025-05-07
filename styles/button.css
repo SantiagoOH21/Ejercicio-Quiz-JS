@@ -3,14 +3,19 @@ button {
   padding: 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
+  font-size: 1rem;
 }
 
 .controls {
   position: absolute;
-  bottom: 1rem;
+  bottom: 0.5rem;
   right: 3rem;
   width: 60%;
   text-align: end;
+}
+
+.resultControls {
+  display: flex;
 }
 
 .controlsBtn {

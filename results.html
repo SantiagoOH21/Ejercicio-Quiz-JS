@@ -17,7 +17,7 @@
     <header>
       <nav>
         <ul>
-          <li><a href="/home.html" >Home</a></li>
+          <li><a href="/home.html" id="linkHome">Home</a></li>
           <li><a href="/question.html " id="linkQuestion">Question</a></li>
           <li><a href="/results.html">Results</a></li>
         </ul>
@@ -29,9 +29,10 @@
       <section id="resultsContainer">
         <div id="scoreContainer"></div>
 
-        <div id="textContainer"></div>
-
-        <p>Thanks for playing our quiz!</p>
+        <div class="messagesContainer">
+          <div id="textContainer"></div>
+          <p>Thanks for playing our quiz!</p>
+        </div>
       </section>
 
       <div id="noResultsContainer"></div>
@@ -49,9 +50,10 @@
         </table>
       </div>
 
-      <div class="controls">
+      <div class="controls resultControls">
         <button id="restartBtn" class="controlsBtn">Play Again</button>
         <button id="rankingBtn" class="controlsBtn hide">Show Ranking</button>
+        <button id="exitBtn" class="controlsBtn">Exit Game</button>
       </div>
     </main>
   </body>
